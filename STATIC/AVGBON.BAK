@@ -1,0 +1,78 @@
+		/* STATIC DATA MEMBER AND STATIC FUNCTION
+
+		Static data member:-
+		1. Takes up space as compile time.
+		2. Initialise to 0.
+		3. Needs to be defined outside the class.
+		4. Common with the class.
+
+		Static function:-
+		1. Can access only static data members.
+		2. When called it's only class name and ::(scope resolution operator) required.  */
+
+#include<iostream.h>
+#include<conio.h>
+class emp
+{
+	int empno;
+	char name[20];
+	int sal;
+	int bon;
+    static int totbon;
+    static int ctr;
+    public:
+	void getdata();
+	void calbon();
+	void putdata();
+    static void printavg();
+};
+int emp::totbon;
+int emp::ctr;
+void emp::getdata()
+{
+	cout<<"\n Enter employee no,name and salary: ";
+	cin>>empno>>ndme>>sal;
+}
+void emp::calbon()
+{
+	bon=0;
+	if(sal<=1000)
+	    bon=0;
+	else if(sal<=5000)
+		   bon=sal*.1;
+	else if(sal<=10000)
+		   bon=sal*.08;
+	       else if(sal<=15000)
+		   bon=sal*.05;
+	if(bon>0)
+	{
+		totbon+=bon;
+		ctr++;
+	}
+}
+void emp::putdata()
+{
+	cout<<"\n Employee no = "<<empno<<"\n Name = "<<name<<"\n Salary = "<<sal<<"\n Bon = "<<bon<<"\n ***********************";
+}
+void emp::printavg()
+{
+	if(ctr>0)
+	    cout<<"\n Average Bonus = "<<totbon/ctr;
+	else
+	    cout<<"\n Kono la bonus nai milish have ";
+	getch();
+}
+void main()
+{
+	emp ob[5];
+	for(int i=0;i<5;i++)
+	{
+		ob[i].getdata();
+		ob[i].calbon();
+	}
+	for(i=0;i<5;i++)
+	{
+		ob[i].putdata();
+	}
+	emp::printavg();
+}

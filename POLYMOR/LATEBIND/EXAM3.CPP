@@ -1,0 +1,70 @@
+// Runtime Polymorphism
+// Concept of pure virtual function
+// Note: pure virtual function must be defined in all derived classes
+
+#include<iostream.h>
+#include<conio.h>
+class Dsouza
+{
+   public:
+    virtual void askproblem()   // Not compulsary to all
+	    {
+	    }
+
+    virtual void payfees()=0;   // pure virtual function // compulsaty to all
+
+	void drink()
+	{
+	    cout<<"\n Water";
+	}
+};
+class C:public Dsouza
+{
+	void askproblem()     // not compulsary either define or don't
+	{
+	    cout<<"\n Sir, What is pointer ?";
+	}
+	void payfees()     // must be defined
+	{
+	    cout<<"\n I have to pay 3000 for C";
+	}
+};
+class CPP:public Dsouza
+{
+	void payfees()
+	{
+	    cout<<"\n I have to pay 3000 for CPP";
+	}
+};
+class Java:public Dsouza
+{
+	void wine()
+	{
+		cout<<"\n Drink wine";
+	}
+	void payfees()
+	{
+	    cout<<"\n I hava to pay 10,000 for Complete java and oracle";
+	}
+};
+
+void main()
+{
+    clrscr();
+	Dsouza *sir;
+	C ob1;
+	CPP ob2;
+	Java ob3;
+
+	sir = &ob1;
+	sir->askproblem();
+	sir->payfees();
+
+	sir= &ob2;
+	sir->payfees();
+
+	sir= &ob3;
+    //  sir->wine();	// Error
+	sir->payfees();
+    getch();
+}

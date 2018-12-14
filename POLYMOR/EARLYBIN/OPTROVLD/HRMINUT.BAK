@@ -1,0 +1,78 @@
+#include<iostream.h>
+#include<conio.h>
+class Time
+{
+	int hr,mi;
+    public:
+	Time(int t)
+	{
+	    hr=t/60;
+	    mi=t%60;
+	}
+	void puttime();
+	Time()
+	{
+	}
+	Time add(Time &);
+	Time add(Time &,Time &);
+	Time operator+(Time&);
+	Time operator+(int);
+	friend Time operator+(int,Time&);
+};
+void Time::puttime()
+{
+	cout<<"\n Hour = "<<hr
+	    <<"\n Minuts ="<<mi;
+}
+Time Time::operator+(Time &k)
+{
+	Time temp;
+
+	temp.hr=hr+k.hr;
+	temp.mi=mi+k.mi;
+	temp.hr+=temp.mi/60;
+	temp.mi%=60;
+	return(temp);
+}
+Time Time::operator+(int t)
+{
+	Time temp;
+	temp.hr=hr+t/60;
+	temp.mi=mi+t%60;
+	temp.hr+=temp.mi/60;
+	temp.mi%=60;
+	return(temp);
+}
+Time operator+(int t,Time &p)
+{
+	Time temp;
+	temp.hr=t/60+p.hr;
+	temp.mi=t%60+p.mi;
+	temp.hr+=temp.mi/60;
+	temp.mi%=60;
+	return(temp);
+}
+void main()
+{
+	clrscr();
+	Time t1(150),t2(160),t3,t4,t5,t6;
+	t3=t1+t2;
+	t4=t1+t2+t3;
+	t5=t1+100;
+      //t6=100+t1;	// Error with member
+	t6=100+t1;     // Ok with friend
+
+	cout<<"\n Contents of t1 =";
+	t1.puttime();
+	cout<<"\n Contents of t2 =";
+	t2.puttime();
+	cout<<"\n Contents of t3 =";
+	t3.puttime();
+	cout<<"\n Contents of t4 =";
+	t4.puttime();
+	cout<<"\n Contents of t5 =";
+	t5.puttime();
+	cout<<"\n Contents of t6 =";
+	t6.puttime();
+	getch();
+}

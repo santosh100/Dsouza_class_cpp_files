@@ -1,0 +1,11 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int t;
+	clrscr();
+	t=add(10,20);
+	printf("\n sum = %d",t);
+	getch();
+
+}

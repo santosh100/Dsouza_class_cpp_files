@@ -1,0 +1,107 @@
+#include<stdio.h>
+#include<conio.h>
+#include<alloc.h>
+int**myplace(int r,int c)
+{
+	int **t,i;
+	t=(int**)calloc(r,sizeof(int));
+	for(i=0;i<r;i++)
+	   *(t+i)=(int*)calloc(c,sizeof(int));
+	return(t);
+}
+void input(int **a,int r)
+{
+	int i,j,x,y;
+	printf("\n Enter a matrix to check either it is upper triangle or lower:  ");
+	for(y=5,i=0;i<r;i++,y+=2)
+	{
+	    for(x=5,j=0;j<r;j++,x+=5)
+	    {
+		gotoxy(x,y);
+		scanf("%d",&a[i][j]);
+	    }
+	}
+}
+void check(int**a,int r)
+{
+	int i,j,k,flag=0,flag2=0,flag3=0;
+	for(k=0;k<r;k++)
+	{
+	    for(i=0,j=k;j<r;j++,i++)
+	    {
+		if(k==0)
+		{
+		    if(a[i][j]==0)
+		    {
+			flag=1;
+			break;
+		    }
+		}
+		else
+		{
+		    if(k==1)
+		    {
+			if(a[i][j]==0)
+			    flag2++;
+			if(a[j][i]==0)
+			    flag3++;
+		    }
+		    else
+		    {
+			if(flag2==r-1)
+			{
+			    if(flag3==r-1)
+			    {
+				flag=1;
+				break;
+			    }
+			    else
+			    {
+				if(a[j][i]==0)
+				    flag3++;
+			    }
+			}
+			if(flag3==r-1)
+			{
+			    if(flag2==r-1)
+			    {
+				flag=1;
+				break;
+			    }
+			    else
+				if(a[i][j]==0)
+				    flag2++;
+			}
+		    }
+		}
+		if(flag3==r-k)
+		{
+		    printf("\n not lower");
+		    break;
+		}
+		else
+		{
+		   if(flag2==r-k)
+		   {
+			printf("\n not upper");
+			break;
+		   }
+		}
+	    }
+	    if(flag==1)
+	    {
+		printf("\n simple matrix: ");
+		break;
+	    }
+	}
+}
+void main()
+{
+	int **a,r,c,i;
+	clrscr();
+	printf("\n Enter Row:&Column ");
+	scanf("%d%d",&r,&c);
+	a=myplace(r,c);
+	input(a,r);
+	check(a,r);
+}
